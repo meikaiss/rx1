@@ -1,0 +1,9 @@
+
+Ÿsquid:S11863"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(×ÝŠÎ8òÐ© µ-
+hsquid:CommentedOutCodeLine>"<This block of commented-out lines of code should be removed.(‰µˆ68Ë„Â µ-
+msquid:UselessImportCheck
+"=Remove this unused import 'org.reactivestreams.Subscription'.(–ºÌèûÿÿÿÿ8òÐ© µ-
+¤squid:S1186."€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¸ÜÒÄøÿÿÿÿ8òÐ© µ-
+]squid:UselessImportCheck"3Remove this unused import 'io.reactivex.Scheduler'.(çší8éƒ‘ µ-
+Ÿsquid:S1186$"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(úÑ¯¤8òÐ© µ-
+esquid:UselessImportCheck	";Remove this unused import 'org.reactivestreams.Subscriber'.(Ð§âE8òÐ© µ-
