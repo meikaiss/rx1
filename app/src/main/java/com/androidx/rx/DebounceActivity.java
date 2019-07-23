@@ -13,13 +13,12 @@ import java.util.concurrent.TimeUnit;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.subjects.PublishSubject;
+import rx.Observable;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.subjects.PublishSubject;
 
-public class MainActivity extends AppCompatActivity {
+public class DebounceActivity extends AppCompatActivity {
 
     @BindView(R.id.btn_debounce)
     public Button btnDebounce;
@@ -27,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_debounce);
         ButterKnife.bind(this);
 
         findViewById(R.id.btn_debounce).setOnClickListener(new View.OnClickListener() {
@@ -52,14 +51,8 @@ public class MainActivity extends AppCompatActivity {
 
         Observer observer = new Observer() {
             @Override
-            public void onSubscribe(Disposable d) {
-
-            }
-
-            @Override
-            public void onNext(Object o) {
-                Log.e("debounce", "3.收到onNext消息，值=" + o);
-                Toast.makeText(MainActivity.this, o.toString(), Toast.LENGTH_SHORT).show();
+            public void onCompleted() {
+                Log.e("debounce", "4.onComplete");
             }
 
             @Override
@@ -68,8 +61,10 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onComplete() {
-                Log.e("debounce", "4.onComplete");
+            public void onNext(Object o) {
+                Log.e("debounce", "3.收到onNext消息，值=" + o);
+                Toast.makeText(DebounceActivity.this, o.toString(), Toast.LENGTH_SHORT).show();
+
             }
         };
 
@@ -80,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_debounce_next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("debounce", "onNext点击");
+                Log.e("debounce", "onNext 点击");
                 publishSubject.onNext(1);
             }
         });
@@ -88,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_debounce_complete).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                publishSubject.onComplete();
+                publishSubject.onCompleted();
             }
         });
     }
