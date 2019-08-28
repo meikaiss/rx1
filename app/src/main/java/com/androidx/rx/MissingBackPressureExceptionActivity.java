@@ -16,7 +16,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 
 /**
- * 模拟 背压异常
+ * 模拟 interval 引发的 背压异常
  * Created by meikai on 2019/08/27.
  */
 public class MissingBackPressureExceptionActivity extends AppCompatActivity {
@@ -62,12 +62,12 @@ public class MissingBackPressureExceptionActivity extends AppCompatActivity {
 
             @Override
             public void onNext(Long aLong) {
-                //让消费者线程停顿1秒，这样消费的速度 就比 生产速度 慢， 当 生产过多的任务时，就会发生 MissingBackPressure
-//                try {
-//                    Thread.sleep(1);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
+                //让消费者线程停顿1秒，这样消费的速度 就比 生产速度 慢， 当 生产过多的任务时，就会发生 MissingBackpressureException
+                try {
+                    Thread.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
                 boolean isMainThread = Looper.getMainLooper() == Looper.myLooper();
                 Log.e("backPressure---", "isMainThread=" + isMainThread + ", " + Thread.currentThread().getName()
