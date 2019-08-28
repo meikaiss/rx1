@@ -40,7 +40,7 @@ public class DebounceActivity extends AppCompatActivity {
     /**
      * 1、发送onNext时，所有 onNext都会延迟3秒生效，若在3秒内有新onNext，则会覆盖之前的所有onNext;
      * 2、发送onComplete时， 会立即执行且只会执行一次
-     * 3、发送完onComplete后，不会后续发送的onNext都不会收到
+     * 3、发送完onComplete后，后续发送的onNext都不会收到
      * @param view
      */
     @OnClick(R.id.btn_debounce)
