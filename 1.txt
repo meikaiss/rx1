@@ -1,391 +1,129 @@
 
-Welcome to Gradle 5.1.1!
+Welcome to Gradle 5.4.1!
 
 Here are the highlights of this release:
- - Control which dependencies can be retrieved from which repositories
- - Production-ready configuration avoidance APIs
+ - Run builds with JDK12
+ - New API for Incremental Tasks
+ - Updates to native projects, including Swift 5 support
 
-For more details see https://docs.gradle.org/5.1.1/release-notes.html
+For more details see https://docs.gradle.org/5.4.1/release-notes.html
 
 
 > Configure project :app
-NDK is missing a "platforms" directory.
-If you are using NDK, verify the ndk.dir is set to a valid NDK directory.  It is currently set to /Users/Shared/Jenkins/Android_SDK/ndk-bundle.
-If you are not using NDK, unset the NDK variable from ANDROID_NDK_HOME or local.properties to remove this warning.
+WARNING: API 'variantOutput.getProcessResources()' is obsolete and has been replaced with 'variantOutput.getProcessResourcesProvider()'.
+It will be removed at the end of 2019.
+For more information, see https://d.android.com/r/tools/task-configuration-avoidance.
+To determine what is calling variantOutput.getProcessResources(), use -Pandroid.debug.obsoleteApi=true on the command line to display more information.
 
+> Task :app:dependencies
 
-> Task :app:androidDependencies
-debug
-debugCompileClasspath - Dependencies for compilation
-+--- androidx.appcompat:appcompat:1.0.2@aar
-+--- androidx.fragment:fragment:1.0.0@aar
-+--- androidx.vectordrawable:vectordrawable-animated:1.0.0@aar
-+--- androidx.legacy:legacy-support-core-ui:1.0.0@aar
-+--- androidx.legacy:legacy-support-core-utils:1.0.0@aar
-+--- androidx.vectordrawable:vectordrawable:1.0.1@aar
-+--- androidx.loader:loader:1.0.0@aar
-+--- androidx.viewpager:viewpager:1.0.0@aar
-+--- androidx.coordinatorlayout:coordinatorlayout:1.0.0@aar
-+--- androidx.drawerlayout:drawerlayout:1.0.0@aar
-+--- androidx.slidingpanelayout:slidingpanelayout:1.0.0@aar
-+--- androidx.customview:customview:1.0.0@aar
-+--- androidx.swiperefreshlayout:swiperefreshlayout:1.0.0@aar
-+--- androidx.asynclayoutinflater:asynclayoutinflater:1.0.0@aar
-+--- androidx.core:core:1.0.1@aar
-+--- androidx.versionedparcelable:versionedparcelable:1.0.0@aar
-+--- androidx.collection:collection:1.0.0@jar
-+--- androidx.cursoradapter:cursoradapter:1.0.0@aar
-+--- androidx.lifecycle:lifecycle-runtime:2.0.0@aar
-+--- androidx.documentfile:documentfile:1.0.0@aar
-+--- androidx.localbroadcastmanager:localbroadcastmanager:1.0.0@aar
-+--- androidx.print:print:1.0.0@aar
-+--- androidx.lifecycle:lifecycle-viewmodel:2.0.0@aar
-+--- androidx.lifecycle:lifecycle-livedata:2.0.0@aar
-+--- androidx.lifecycle:lifecycle-livedata-core:2.0.0@aar
-+--- androidx.lifecycle:lifecycle-common:2.0.0@jar
-+--- androidx.arch.core:core-runtime:2.0.0@aar
-+--- androidx.arch.core:core-common:2.0.0@jar
-+--- androidx.interpolator:interpolator:1.0.0@aar
-+--- androidx.annotation:annotation:1.0.0@jar
-+--- androidx.constraintlayout:constraintlayout:1.1.3@aar
-+--- androidx.constraintlayout:constraintlayout-solver:1.1.3@jar
-+--- io.reactivex.rxjava2:rxandroid:2.1.1@aar
-+--- io.reactivex.rxjava2:rxjava:2.2.9@jar
-\--- org.reactivestreams:reactive-streams:1.0.2@jar
+------------------------------------------------------------
+Project :app
+------------------------------------------------------------
 
-debugRuntimeClasspath - Dependencies for runtime/packaging
-+--- androidx.appcompat:appcompat:1.0.2@aar
-+--- androidx.constraintlayout:constraintlayout:1.1.3@aar
-+--- io.reactivex.rxjava2:rxandroid:2.1.1@aar
-+--- io.reactivex.rxjava2:rxjava:2.2.9@jar
-+--- androidx.fragment:fragment:1.0.0@aar
-+--- androidx.vectordrawable:vectordrawable-animated:1.0.0@aar
-+--- androidx.legacy:legacy-support-core-ui:1.0.0@aar
-+--- androidx.legacy:legacy-support-core-utils:1.0.0@aar
-+--- androidx.vectordrawable:vectordrawable:1.0.1@aar
-+--- androidx.loader:loader:1.0.0@aar
-+--- androidx.viewpager:viewpager:1.0.0@aar
-+--- androidx.coordinatorlayout:coordinatorlayout:1.0.0@aar
-+--- androidx.drawerlayout:drawerlayout:1.0.0@aar
-+--- androidx.slidingpanelayout:slidingpanelayout:1.0.0@aar
-+--- androidx.customview:customview:1.0.0@aar
-+--- androidx.swiperefreshlayout:swiperefreshlayout:1.0.0@aar
-+--- androidx.asynclayoutinflater:asynclayoutinflater:1.0.0@aar
-+--- androidx.core:core:1.0.1@aar
-+--- androidx.versionedparcelable:versionedparcelable:1.0.0@aar
-+--- androidx.collection:collection:1.0.0@jar
-+--- androidx.cursoradapter:cursoradapter:1.0.0@aar
-+--- androidx.lifecycle:lifecycle-runtime:2.0.0@aar
-+--- androidx.documentfile:documentfile:1.0.0@aar
-+--- androidx.localbroadcastmanager:localbroadcastmanager:1.0.0@aar
-+--- androidx.print:print:1.0.0@aar
-+--- androidx.lifecycle:lifecycle-viewmodel:2.0.0@aar
-+--- androidx.lifecycle:lifecycle-livedata:2.0.0@aar
-+--- androidx.lifecycle:lifecycle-livedata-core:2.0.0@aar
-+--- androidx.lifecycle:lifecycle-common:2.0.0@jar
-+--- androidx.arch.core:core-runtime:2.0.0@aar
-+--- androidx.arch.core:core-common:2.0.0@jar
-+--- androidx.interpolator:interpolator:1.0.0@aar
-+--- androidx.annotation:annotation:1.0.0@jar
-+--- androidx.constraintlayout:constraintlayout-solver:1.1.3@jar
-\--- org.reactivestreams:reactive-streams:1.0.2@jar
+releaseRuntimeClasspath - Resolved configuration for runtime for variant: release
++--- androidx.appcompat:appcompat:1.0.2
+|    +--- androidx.annotation:annotation:1.0.0
+|    +--- androidx.core:core:1.0.1
+|    |    +--- androidx.annotation:annotation:1.0.0
+|    |    +--- androidx.collection:collection:1.0.0
+|    |    |    \--- androidx.annotation:annotation:1.0.0
+|    |    +--- androidx.lifecycle:lifecycle-runtime:2.0.0
+|    |    |    +--- androidx.lifecycle:lifecycle-common:2.0.0
+|    |    |    |    \--- androidx.annotation:annotation:1.0.0
+|    |    |    +--- androidx.arch.core:core-common:2.0.0
+|    |    |    |    \--- androidx.annotation:annotation:1.0.0
+|    |    |    \--- androidx.annotation:annotation:1.0.0
+|    |    \--- androidx.versionedparcelable:versionedparcelable:1.0.0
+|    |         +--- androidx.annotation:annotation:1.0.0
+|    |         \--- androidx.collection:collection:1.0.0 (*)
+|    +--- androidx.collection:collection:1.0.0 (*)
+|    +--- androidx.cursoradapter:cursoradapter:1.0.0
+|    |    \--- androidx.annotation:annotation:1.0.0
+|    +--- androidx.legacy:legacy-support-core-utils:1.0.0
+|    |    +--- androidx.annotation:annotation:1.0.0
+|    |    +--- androidx.core:core:1.0.0 -> 1.0.1 (*)
+|    |    +--- androidx.documentfile:documentfile:1.0.0
+|    |    |    \--- androidx.annotation:annotation:1.0.0
+|    |    +--- androidx.loader:loader:1.0.0
+|    |    |    +--- androidx.annotation:annotation:1.0.0
+|    |    |    +--- androidx.core:core:1.0.0 -> 1.0.1 (*)
+|    |    |    +--- androidx.lifecycle:lifecycle-livedata:2.0.0
+|    |    |    |    +--- androidx.arch.core:core-runtime:2.0.0
+|    |    |    |    |    +--- androidx.annotation:annotation:1.0.0
+|    |    |    |    |    \--- androidx.arch.core:core-common:2.0.0 (*)
+|    |    |    |    +--- androidx.lifecycle:lifecycle-livedata-core:2.0.0
+|    |    |    |    |    +--- androidx.lifecycle:lifecycle-common:2.0.0 (*)
+|    |    |    |    |    +--- androidx.arch.core:core-common:2.0.0 (*)
+|    |    |    |    |    \--- androidx.arch.core:core-runtime:2.0.0 (*)
+|    |    |    |    \--- androidx.arch.core:core-common:2.0.0 (*)
+|    |    |    \--- androidx.lifecycle:lifecycle-viewmodel:2.0.0
+|    |    |         \--- androidx.annotation:annotation:1.0.0
+|    |    +--- androidx.localbroadcastmanager:localbroadcastmanager:1.0.0
+|    |    |    \--- androidx.annotation:annotation:1.0.0
+|    |    \--- androidx.print:print:1.0.0
+|    |         \--- androidx.annotation:annotation:1.0.0
+|    +--- androidx.fragment:fragment:1.0.0
+|    |    +--- androidx.core:core:1.0.0 -> 1.0.1 (*)
+|    |    +--- androidx.legacy:legacy-support-core-ui:1.0.0
+|    |    |    +--- androidx.annotation:annotation:1.0.0
+|    |    |    +--- androidx.core:core:1.0.0 -> 1.0.1 (*)
+|    |    |    +--- androidx.legacy:legacy-support-core-utils:1.0.0 (*)
+|    |    |    +--- androidx.customview:customview:1.0.0
+|    |    |    |    +--- androidx.annotation:annotation:1.0.0
+|    |    |    |    \--- androidx.core:core:1.0.0 -> 1.0.1 (*)
+|    |    |    +--- androidx.viewpager:viewpager:1.0.0
+|    |    |    |    +--- androidx.annotation:annotation:1.0.0
+|    |    |    |    +--- androidx.core:core:1.0.0 -> 1.0.1 (*)
+|    |    |    |    \--- androidx.customview:customview:1.0.0 (*)
+|    |    |    +--- androidx.coordinatorlayout:coordinatorlayout:1.0.0
+|    |    |    |    +--- androidx.annotation:annotation:1.0.0
+|    |    |    |    +--- androidx.core:core:1.0.0 -> 1.0.1 (*)
+|    |    |    |    \--- androidx.customview:customview:1.0.0 (*)
+|    |    |    +--- androidx.drawerlayout:drawerlayout:1.0.0
+|    |    |    |    +--- androidx.annotation:annotation:1.0.0
+|    |    |    |    +--- androidx.core:core:1.0.0 -> 1.0.1 (*)
+|    |    |    |    \--- androidx.customview:customview:1.0.0 (*)
+|    |    |    +--- androidx.slidingpanelayout:slidingpanelayout:1.0.0
+|    |    |    |    +--- androidx.annotation:annotation:1.0.0
+|    |    |    |    +--- androidx.core:core:1.0.0 -> 1.0.1 (*)
+|    |    |    |    \--- androidx.customview:customview:1.0.0 (*)
+|    |    |    +--- androidx.interpolator:interpolator:1.0.0
+|    |    |    |    \--- androidx.annotation:annotation:1.0.0
+|    |    |    +--- androidx.swiperefreshlayout:swiperefreshlayout:1.0.0
+|    |    |    |    +--- androidx.annotation:annotation:1.0.0
+|    |    |    |    +--- androidx.core:core:1.0.0 -> 1.0.1 (*)
+|    |    |    |    \--- androidx.interpolator:interpolator:1.0.0 (*)
+|    |    |    +--- androidx.asynclayoutinflater:asynclayoutinflater:1.0.0
+|    |    |    |    +--- androidx.annotation:annotation:1.0.0
+|    |    |    |    \--- androidx.core:core:1.0.0 -> 1.0.1 (*)
+|    |    |    \--- androidx.cursoradapter:cursoradapter:1.0.0 (*)
+|    |    +--- androidx.legacy:legacy-support-core-utils:1.0.0 (*)
+|    |    +--- androidx.annotation:annotation:1.0.0
+|    |    +--- androidx.loader:loader:1.0.0 (*)
+|    |    \--- androidx.lifecycle:lifecycle-viewmodel:2.0.0 (*)
+|    +--- androidx.vectordrawable:vectordrawable:1.0.1
+|    |    +--- androidx.annotation:annotation:1.0.0
+|    |    \--- androidx.core:core:1.0.0 -> 1.0.1 (*)
+|    \--- androidx.vectordrawable:vectordrawable-animated:1.0.0
+|         +--- androidx.vectordrawable:vectordrawable:1.0.0 -> 1.0.1 (*)
+|         \--- androidx.legacy:legacy-support-core-ui:1.0.0 (*)
++--- androidx.constraintlayout:constraintlayout:1.1.3
+|    \--- androidx.constraintlayout:constraintlayout-solver:1.1.3
++--- io.reactivex:rxjava:1.3.8
++--- io.reactivex:rxandroid:1.2.1
+|    \--- io.reactivex:rxjava:1.1.6 -> 1.3.8
++--- com.netflix.rxjava:rxjava-async-util:0.19.6
+|    \--- com.netflix.rxjava:rxjava-core:0.19.6
+\--- com.jakewharton:butterknife:10.1.0
+     \--- com.jakewharton:butterknife-runtime:10.1.0
+          +--- com.jakewharton:butterknife-annotations:10.1.0
+          |    \--- androidx.annotation:annotation:1.0.0
+          \--- androidx.core:core:1.0.0 -> 1.0.1 (*)
 
-debugAndroidTest
-debugAndroidTestCompileClasspath - Dependencies for compilation
-+--- androidx.test.espresso:espresso-core:3.2.0-alpha03@aar
-+--- androidx.test:runner:1.2.0-alpha03@aar
-+--- androidx.appcompat:appcompat:1.0.2@aar
-+--- androidx.test:monitor:1.2.0-alpha03@aar
-+--- androidx.fragment:fragment:1.0.0@aar
-+--- androidx.vectordrawable:vectordrawable-animated:1.0.0@aar
-+--- androidx.legacy:legacy-support-core-ui:1.0.0@aar
-+--- androidx.legacy:legacy-support-core-utils:1.0.0@aar
-+--- androidx.vectordrawable:vectordrawable:1.0.1@aar
-+--- androidx.loader:loader:1.0.0@aar
-+--- androidx.viewpager:viewpager:1.0.0@aar
-+--- androidx.coordinatorlayout:coordinatorlayout:1.0.0@aar
-+--- androidx.drawerlayout:drawerlayout:1.0.0@aar
-+--- androidx.slidingpanelayout:slidingpanelayout:1.0.0@aar
-+--- androidx.customview:customview:1.0.0@aar
-+--- androidx.swiperefreshlayout:swiperefreshlayout:1.0.0@aar
-+--- androidx.asynclayoutinflater:asynclayoutinflater:1.0.0@aar
-+--- androidx.core:core:1.0.1@aar
-+--- androidx.versionedparcelable:versionedparcelable:1.0.0@aar
-+--- androidx.collection:collection:1.0.0@jar
-+--- androidx.cursoradapter:cursoradapter:1.0.0@aar
-+--- androidx.lifecycle:lifecycle-runtime:2.0.0@aar
-+--- androidx.documentfile:documentfile:1.0.0@aar
-+--- androidx.localbroadcastmanager:localbroadcastmanager:1.0.0@aar
-+--- androidx.print:print:1.0.0@aar
-+--- androidx.lifecycle:lifecycle-viewmodel:2.0.0@aar
-+--- androidx.lifecycle:lifecycle-livedata:2.0.0@aar
-+--- androidx.lifecycle:lifecycle-livedata-core:2.0.0@aar
-+--- androidx.lifecycle:lifecycle-common:2.0.0@jar
-+--- androidx.arch.core:core-runtime:2.0.0@aar
-+--- androidx.arch.core:core-common:2.0.0@jar
-+--- androidx.interpolator:interpolator:1.0.0@aar
-+--- androidx.annotation:annotation:1.0.0@jar
-+--- junit:junit:4.12@jar
-+--- org.hamcrest:hamcrest-integration:1.3@jar
-+--- org.hamcrest:hamcrest-library:1.3@jar
-+--- org.hamcrest:hamcrest-core:1.3@jar
-+--- net.sf.kxml:kxml2:2.3.0@jar
-+--- androidx.test.espresso:espresso-idling-resource:3.2.0-alpha03@aar
-+--- com.squareup:javawriter:2.1.1@jar
-+--- javax.inject:javax.inject:1@jar
-+--- com.google.code.findbugs:jsr305:2.0.1@jar
-+--- androidx.constraintlayout:constraintlayout:1.1.3@aar
-+--- androidx.constraintlayout:constraintlayout-solver:1.1.3@jar
-+--- io.reactivex.rxjava2:rxandroid:2.1.1@aar
-+--- io.reactivex.rxjava2:rxjava:2.2.9@jar
-\--- org.reactivestreams:reactive-streams:1.0.2@jar
+(*) - dependencies omitted (listed previously)
 
-debugAndroidTestRuntimeClasspath - Dependencies for runtime/packaging
-+--- androidx.test.espresso:espresso-core:3.2.0-alpha03@aar
-+--- androidx.test:runner:1.2.0-alpha03@aar
-+--- androidx.test:monitor:1.2.0-alpha03@aar
-+--- junit:junit:4.12@jar
-+--- net.sf.kxml:kxml2:2.3.0@jar
-+--- androidx.test.espresso:espresso-idling-resource:3.2.0-alpha03@aar
-+--- com.squareup:javawriter:2.1.1@jar
-+--- javax.inject:javax.inject:1@jar
-+--- org.hamcrest:hamcrest-integration:1.3@jar
-+--- org.hamcrest:hamcrest-library:1.3@jar
-+--- com.google.code.findbugs:jsr305:2.0.1@jar
-\--- org.hamcrest:hamcrest-core:1.3@jar
-
-debugUnitTest
-debugUnitTestCompileClasspath - Dependencies for compilation
-+--- androidx.appcompat:appcompat:1.0.2@aar
-+--- androidx.fragment:fragment:1.0.0@aar
-+--- androidx.vectordrawable:vectordrawable-animated:1.0.0@aar
-+--- androidx.legacy:legacy-support-core-ui:1.0.0@aar
-+--- androidx.legacy:legacy-support-core-utils:1.0.0@aar
-+--- androidx.vectordrawable:vectordrawable:1.0.1@aar
-+--- androidx.loader:loader:1.0.0@aar
-+--- androidx.viewpager:viewpager:1.0.0@aar
-+--- androidx.coordinatorlayout:coordinatorlayout:1.0.0@aar
-+--- androidx.drawerlayout:drawerlayout:1.0.0@aar
-+--- androidx.slidingpanelayout:slidingpanelayout:1.0.0@aar
-+--- androidx.customview:customview:1.0.0@aar
-+--- androidx.swiperefreshlayout:swiperefreshlayout:1.0.0@aar
-+--- androidx.asynclayoutinflater:asynclayoutinflater:1.0.0@aar
-+--- androidx.core:core:1.0.1@aar
-+--- androidx.versionedparcelable:versionedparcelable:1.0.0@aar
-+--- androidx.collection:collection:1.0.0@jar
-+--- androidx.cursoradapter:cursoradapter:1.0.0@aar
-+--- androidx.lifecycle:lifecycle-runtime:2.0.0@aar
-+--- androidx.documentfile:documentfile:1.0.0@aar
-+--- androidx.localbroadcastmanager:localbroadcastmanager:1.0.0@aar
-+--- androidx.print:print:1.0.0@aar
-+--- androidx.lifecycle:lifecycle-viewmodel:2.0.0@aar
-+--- androidx.lifecycle:lifecycle-livedata:2.0.0@aar
-+--- androidx.lifecycle:lifecycle-livedata-core:2.0.0@aar
-+--- androidx.lifecycle:lifecycle-common:2.0.0@jar
-+--- androidx.arch.core:core-runtime:2.0.0@aar
-+--- androidx.arch.core:core-common:2.0.0@jar
-+--- androidx.interpolator:interpolator:1.0.0@aar
-+--- androidx.annotation:annotation:1.0.0@jar
-+--- androidx.constraintlayout:constraintlayout:1.1.3@aar
-+--- androidx.constraintlayout:constraintlayout-solver:1.1.3@jar
-+--- io.reactivex.rxjava2:rxandroid:2.1.1@aar
-+--- io.reactivex.rxjava2:rxjava:2.2.9@jar
-+--- org.reactivestreams:reactive-streams:1.0.2@jar
-+--- junit:junit:4.12@jar
-\--- org.hamcrest:hamcrest-core:1.3@jar
-
-debugUnitTestRuntimeClasspath - Dependencies for runtime/packaging
-+--- androidx.appcompat:appcompat:1.0.2@aar
-+--- androidx.constraintlayout:constraintlayout:1.1.3@aar
-+--- io.reactivex.rxjava2:rxandroid:2.1.1@aar
-+--- io.reactivex.rxjava2:rxjava:2.2.9@jar
-+--- junit:junit:4.12@jar
-+--- androidx.fragment:fragment:1.0.0@aar
-+--- androidx.vectordrawable:vectordrawable-animated:1.0.0@aar
-+--- androidx.legacy:legacy-support-core-ui:1.0.0@aar
-+--- androidx.legacy:legacy-support-core-utils:1.0.0@aar
-+--- androidx.vectordrawable:vectordrawable:1.0.1@aar
-+--- androidx.loader:loader:1.0.0@aar
-+--- androidx.viewpager:viewpager:1.0.0@aar
-+--- androidx.coordinatorlayout:coordinatorlayout:1.0.0@aar
-+--- androidx.drawerlayout:drawerlayout:1.0.0@aar
-+--- androidx.slidingpanelayout:slidingpanelayout:1.0.0@aar
-+--- androidx.customview:customview:1.0.0@aar
-+--- androidx.swiperefreshlayout:swiperefreshlayout:1.0.0@aar
-+--- androidx.asynclayoutinflater:asynclayoutinflater:1.0.0@aar
-+--- androidx.core:core:1.0.1@aar
-+--- androidx.versionedparcelable:versionedparcelable:1.0.0@aar
-+--- androidx.collection:collection:1.0.0@jar
-+--- androidx.cursoradapter:cursoradapter:1.0.0@aar
-+--- androidx.lifecycle:lifecycle-runtime:2.0.0@aar
-+--- androidx.documentfile:documentfile:1.0.0@aar
-+--- androidx.localbroadcastmanager:localbroadcastmanager:1.0.0@aar
-+--- androidx.print:print:1.0.0@aar
-+--- androidx.lifecycle:lifecycle-viewmodel:2.0.0@aar
-+--- androidx.lifecycle:lifecycle-livedata:2.0.0@aar
-+--- androidx.lifecycle:lifecycle-livedata-core:2.0.0@aar
-+--- androidx.lifecycle:lifecycle-common:2.0.0@jar
-+--- androidx.arch.core:core-runtime:2.0.0@aar
-+--- androidx.arch.core:core-common:2.0.0@jar
-+--- androidx.interpolator:interpolator:1.0.0@aar
-+--- androidx.annotation:annotation:1.0.0@jar
-+--- androidx.constraintlayout:constraintlayout-solver:1.1.3@jar
-+--- org.reactivestreams:reactive-streams:1.0.2@jar
-\--- org.hamcrest:hamcrest-core:1.3@jar
-
-release
-releaseCompileClasspath - Dependencies for compilation
-+--- androidx.appcompat:appcompat:1.0.2@aar
-+--- androidx.constraintlayout:constraintlayout:1.1.3@aar
-+--- io.reactivex.rxjava2:rxandroid:2.1.1@aar
-+--- io.reactivex.rxjava2:rxjava:2.2.9@jar
-+--- androidx.fragment:fragment:1.0.0@aar
-+--- androidx.vectordrawable:vectordrawable-animated:1.0.0@aar
-+--- androidx.legacy:legacy-support-core-ui:1.0.0@aar
-+--- androidx.legacy:legacy-support-core-utils:1.0.0@aar
-+--- androidx.vectordrawable:vectordrawable:1.0.1@aar
-+--- androidx.loader:loader:1.0.0@aar
-+--- androidx.viewpager:viewpager:1.0.0@aar
-+--- androidx.coordinatorlayout:coordinatorlayout:1.0.0@aar
-+--- androidx.drawerlayout:drawerlayout:1.0.0@aar
-+--- androidx.slidingpanelayout:slidingpanelayout:1.0.0@aar
-+--- androidx.customview:customview:1.0.0@aar
-+--- androidx.swiperefreshlayout:swiperefreshlayout:1.0.0@aar
-+--- androidx.asynclayoutinflater:asynclayoutinflater:1.0.0@aar
-+--- androidx.core:core:1.0.1@aar
-+--- androidx.versionedparcelable:versionedparcelable:1.0.0@aar
-+--- androidx.collection:collection:1.0.0@jar
-+--- androidx.cursoradapter:cursoradapter:1.0.0@aar
-+--- androidx.lifecycle:lifecycle-runtime:2.0.0@aar
-+--- androidx.documentfile:documentfile:1.0.0@aar
-+--- androidx.localbroadcastmanager:localbroadcastmanager:1.0.0@aar
-+--- androidx.print:print:1.0.0@aar
-+--- androidx.lifecycle:lifecycle-viewmodel:2.0.0@aar
-+--- androidx.lifecycle:lifecycle-livedata:2.0.0@aar
-+--- androidx.lifecycle:lifecycle-livedata-core:2.0.0@aar
-+--- androidx.lifecycle:lifecycle-common:2.0.0@jar
-+--- androidx.arch.core:core-runtime:2.0.0@aar
-+--- androidx.arch.core:core-common:2.0.0@jar
-+--- androidx.interpolator:interpolator:1.0.0@aar
-+--- androidx.annotation:annotation:1.0.0@jar
-+--- androidx.constraintlayout:constraintlayout-solver:1.1.3@jar
-\--- org.reactivestreams:reactive-streams:1.0.2@jar
-
-releaseRuntimeClasspath - Dependencies for runtime/packaging
-+--- androidx.appcompat:appcompat:1.0.2@aar
-+--- androidx.constraintlayout:constraintlayout:1.1.3@aar
-+--- io.reactivex.rxjava2:rxandroid:2.1.1@aar
-+--- io.reactivex.rxjava2:rxjava:2.2.9@jar
-+--- androidx.fragment:fragment:1.0.0@aar
-+--- androidx.vectordrawable:vectordrawable-animated:1.0.0@aar
-+--- androidx.legacy:legacy-support-core-ui:1.0.0@aar
-+--- androidx.legacy:legacy-support-core-utils:1.0.0@aar
-+--- androidx.vectordrawable:vectordrawable:1.0.1@aar
-+--- androidx.loader:loader:1.0.0@aar
-+--- androidx.viewpager:viewpager:1.0.0@aar
-+--- androidx.coordinatorlayout:coordinatorlayout:1.0.0@aar
-+--- androidx.drawerlayout:drawerlayout:1.0.0@aar
-+--- androidx.slidingpanelayout:slidingpanelayout:1.0.0@aar
-+--- androidx.customview:customview:1.0.0@aar
-+--- androidx.swiperefreshlayout:swiperefreshlayout:1.0.0@aar
-+--- androidx.asynclayoutinflater:asynclayoutinflater:1.0.0@aar
-+--- androidx.core:core:1.0.1@aar
-+--- androidx.versionedparcelable:versionedparcelable:1.0.0@aar
-+--- androidx.collection:collection:1.0.0@jar
-+--- androidx.cursoradapter:cursoradapter:1.0.0@aar
-+--- androidx.lifecycle:lifecycle-runtime:2.0.0@aar
-+--- androidx.documentfile:documentfile:1.0.0@aar
-+--- androidx.localbroadcastmanager:localbroadcastmanager:1.0.0@aar
-+--- androidx.print:print:1.0.0@aar
-+--- androidx.lifecycle:lifecycle-viewmodel:2.0.0@aar
-+--- androidx.lifecycle:lifecycle-livedata:2.0.0@aar
-+--- androidx.lifecycle:lifecycle-livedata-core:2.0.0@aar
-+--- androidx.lifecycle:lifecycle-common:2.0.0@jar
-+--- androidx.arch.core:core-runtime:2.0.0@aar
-+--- androidx.arch.core:core-common:2.0.0@jar
-+--- androidx.interpolator:interpolator:1.0.0@aar
-+--- androidx.annotation:annotation:1.0.0@jar
-+--- androidx.constraintlayout:constraintlayout-solver:1.1.3@jar
-\--- org.reactivestreams:reactive-streams:1.0.2@jar
-
-releaseUnitTest
-releaseUnitTestCompileClasspath - Dependencies for compilation
-+--- androidx.appcompat:appcompat:1.0.2@aar
-+--- androidx.constraintlayout:constraintlayout:1.1.3@aar
-+--- io.reactivex.rxjava2:rxandroid:2.1.1@aar
-+--- io.reactivex.rxjava2:rxjava:2.2.9@jar
-+--- androidx.fragment:fragment:1.0.0@aar
-+--- androidx.vectordrawable:vectordrawable-animated:1.0.0@aar
-+--- androidx.legacy:legacy-support-core-ui:1.0.0@aar
-+--- androidx.legacy:legacy-support-core-utils:1.0.0@aar
-+--- androidx.vectordrawable:vectordrawable:1.0.1@aar
-+--- androidx.loader:loader:1.0.0@aar
-+--- androidx.viewpager:viewpager:1.0.0@aar
-+--- androidx.coordinatorlayout:coordinatorlayout:1.0.0@aar
-+--- androidx.drawerlayout:drawerlayout:1.0.0@aar
-+--- androidx.slidingpanelayout:slidingpanelayout:1.0.0@aar
-+--- androidx.customview:customview:1.0.0@aar
-+--- androidx.swiperefreshlayout:swiperefreshlayout:1.0.0@aar
-+--- androidx.asynclayoutinflater:asynclayoutinflater:1.0.0@aar
-+--- androidx.core:core:1.0.1@aar
-+--- androidx.versionedparcelable:versionedparcelable:1.0.0@aar
-+--- androidx.collection:collection:1.0.0@jar
-+--- androidx.cursoradapter:cursoradapter:1.0.0@aar
-+--- androidx.lifecycle:lifecycle-runtime:2.0.0@aar
-+--- androidx.documentfile:documentfile:1.0.0@aar
-+--- androidx.localbroadcastmanager:localbroadcastmanager:1.0.0@aar
-+--- androidx.print:print:1.0.0@aar
-+--- androidx.lifecycle:lifecycle-viewmodel:2.0.0@aar
-+--- androidx.lifecycle:lifecycle-livedata:2.0.0@aar
-+--- androidx.lifecycle:lifecycle-livedata-core:2.0.0@aar
-+--- androidx.lifecycle:lifecycle-common:2.0.0@jar
-+--- androidx.arch.core:core-runtime:2.0.0@aar
-+--- androidx.arch.core:core-common:2.0.0@jar
-+--- androidx.interpolator:interpolator:1.0.0@aar
-+--- androidx.annotation:annotation:1.0.0@jar
-+--- androidx.constraintlayout:constraintlayout-solver:1.1.3@jar
-+--- org.reactivestreams:reactive-streams:1.0.2@jar
-+--- junit:junit:4.12@jar
-\--- org.hamcrest:hamcrest-core:1.3@jar
-
-releaseUnitTestRuntimeClasspath - Dependencies for runtime/packaging
-+--- androidx.appcompat:appcompat:1.0.2@aar
-+--- androidx.constraintlayout:constraintlayout:1.1.3@aar
-+--- io.reactivex.rxjava2:rxandroid:2.1.1@aar
-+--- io.reactivex.rxjava2:rxjava:2.2.9@jar
-+--- junit:junit:4.12@jar
-+--- androidx.fragment:fragment:1.0.0@aar
-+--- androidx.vectordrawable:vectordrawable-animated:1.0.0@aar
-+--- androidx.legacy:legacy-support-core-ui:1.0.0@aar
-+--- androidx.legacy:legacy-support-core-utils:1.0.0@aar
-+--- androidx.vectordrawable:vectordrawable:1.0.1@aar
-+--- androidx.loader:loader:1.0.0@aar
-+--- androidx.viewpager:viewpager:1.0.0@aar
-+--- androidx.coordinatorlayout:coordinatorlayout:1.0.0@aar
-+--- androidx.drawerlayout:drawerlayout:1.0.0@aar
-+--- androidx.slidingpanelayout:slidingpanelayout:1.0.0@aar
-+--- androidx.customview:customview:1.0.0@aar
-+--- androidx.swiperefreshlayout:swiperefreshlayout:1.0.0@aar
-+--- androidx.asynclayoutinflater:asynclayoutinflater:1.0.0@aar
-+--- androidx.core:core:1.0.1@aar
-+--- androidx.versionedparcelable:versionedparcelable:1.0.0@aar
-+--- androidx.collection:collection:1.0.0@jar
-+--- androidx.cursoradapter:cursoradapter:1.0.0@aar
-+--- androidx.lifecycle:lifecycle-runtime:2.0.0@aar
-+--- androidx.documentfile:documentfile:1.0.0@aar
-+--- androidx.localbroadcastmanager:localbroadcastmanager:1.0.0@aar
-+--- androidx.print:print:1.0.0@aar
-+--- androidx.lifecycle:lifecycle-viewmodel:2.0.0@aar
-+--- androidx.lifecycle:lifecycle-livedata:2.0.0@aar
-+--- androidx.lifecycle:lifecycle-livedata-core:2.0.0@aar
-+--- androidx.lifecycle:lifecycle-common:2.0.0@jar
-+--- androidx.arch.core:core-runtime:2.0.0@aar
-+--- androidx.arch.core:core-common:2.0.0@jar
-+--- androidx.interpolator:interpolator:1.0.0@aar
-+--- androidx.annotation:annotation:1.0.0@jar
-+--- androidx.constraintlayout:constraintlayout-solver:1.1.3@jar
-+--- org.reactivestreams:reactive-streams:1.0.2@jar
-\--- org.hamcrest:hamcrest-core:1.3@jar
+A web-based, searchable dependency report is available by adding the --scan option.
 
 BUILD SUCCESSFUL in 0s
 1 actionable task: 1 executed

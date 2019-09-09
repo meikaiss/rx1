@@ -3,12 +3,17 @@ package com.androidx.rx;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.LinearInterpolator;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -32,6 +37,9 @@ public class BufferActivity extends AppCompatActivity {
                 initSingleBuffer2();
             }
         });
+
+
+
     }
 
     private void initNormalBuffer() {

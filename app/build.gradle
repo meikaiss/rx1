@@ -36,6 +36,9 @@ dependencies {
     implementation group: 'io.reactivex', name: 'rxjava', version: '1.3.8'
     implementation group: 'io.reactivex', name: 'rxandroid', version: '1.2.1'
 
+    //传说中的rx工具类，实际并没有用
+//    implementation group: 'com.netflix.rxjava', name: 'rxjava-async-util', version: '0.19.6'
+
 
 
     // https://mvnrepository.com/artifact/com.jakewharton/butterknife
