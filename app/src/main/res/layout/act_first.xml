@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/btn_first"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="first"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_first_func"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="firstFunc"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_first_func_or_default"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="firstFuncOrDefault"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_single"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="single"
+        android:textAllCaps="false" />
+
+</LinearLayout>

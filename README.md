@@ -1,8 +1,9 @@
 # rx1
 
 
+
 /**
- * RX1 相关一句话简介
+ #### RX1 相关一句话简介
  */
 
 /**
@@ -61,7 +62,33 @@
  *            如果你传递的是一个负数，或者原始Observable的数据项数小于index+1，将会抛出一个IndexOutOfBoundsException异常
  * elementAtOrDefault 如果索引值大于数据项数，它会发射一个默认值（通过额外的参数指定），而不是抛出异常。
  *                    但是如果你传递一个负数索引值，它仍然会抛出一个IndexOutOfBoundsException异常。
+ * filter     过滤源头，filter函数返回true的项将被发射出去，而返回false的项会被过滤掉
+ 
+ * first      只发射源的第一项数据，然后立即发射onComplete
+ * firstFunc  发射符合条件的第一项数据，如果没有源数据，则会发射onError
+ * firstOrDefault  发射符合条件的第一项数据，如果没有源数据，则会发射默认值 及 onComplete 
  *
+ * takeFirst  发射第一项数据，当源头无数据时，会返回一个空的Observable（不调用onNext()但是会调用onCompleted）
+              区别于first，first的源无数据时，会抛出NoSuchElementException
+              
+ * single     发射第一项数据，并且要求源头在 onComplete之前 只能发射一项数据，若发射2项或以上则会 NoSuchElementException，并且第一项数据也不会发射出去
+ *
+ * ignoreElements  忽略所有 onNext， 但不会忽略 onError、onComplete
+ * last       类比 first
+ * taskLast   类比 takeFirst
+ 
+ * sample     发射每个采样周期内的最后一项数据
+ * throttleLast  功能 同 sample相同  
+ * throttleFirst 发射每个采样周期内的第一顶数据
+ *
+ * skip      跳过源头开始的 前N项、或 前N秒时间内 的 数据
+ * skipLast  跳过源头末尾的 后N项、或 后N秒时间内 的 数据
+ *
+ * take      只发射源头的前 N 项数据
+ * takeLast  只发射源头的后 N 项数据
+ *
+ *
+
 
  */
 
@@ -69,6 +96,65 @@
 
 
 
+
+/**
+ * ==结合操作==
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ */
+
+
+/**
+ * ==错误处理==
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ */
+
+
+/**
+ * ==辅助操作==
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ */
+
+
+/**
+ * ==条件与布尔操作==
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ */
+
+
+/**
+ * ==连接操作==
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ */
 
 
 
