@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func2;
 import rx.functions.Func3;
 import rx.schedulers.Schedulers;
 
@@ -30,7 +31,8 @@ public class ZipActivity extends AppCompatActivity {
         findViewById(R.id.btn_zip).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                init();
+                zip();
+                zip2();
             }
         });
 
@@ -43,6 +45,74 @@ public class ZipActivity extends AppCompatActivity {
          */
 
     }
+
+    private void zip() {
+
+        Observable.zip(Observable.range(1, 100), Observable.range(10000, 11000),
+                new Func2<Integer, Integer, String>() {
+                    @Override
+                    public String call(Integer integer, Integer integer2) {
+                        return "a=" + integer + ", b=" + integer2;
+                    }
+                }).subscribe(new Subscriber<String>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(String s) {
+                Log.e("zip1", "s=" + s);
+            }
+        });
+
+    }
+
+    private void zip2() {
+        Observable observable1 = Observable.unsafeCreate(new Observable.OnSubscribe<Integer>() {
+            @Override
+            public void call(Subscriber<? super Integer> subscriber) {
+
+                for (int i = 1; i <= 5; i++) {
+                    subscriber.onNext(i);
+                }
+
+                subscriber.onNext(51);
+                subscriber.onNext(52);
+
+            }
+        });
+
+        Observable.zip(observable1, Observable.range(10000, 10010),
+                new Func2<Integer, Integer, String>() {
+                    @Override
+                    public String call(Integer integer, Integer integer2) {
+                        return "a=" + integer + ", b=" + integer2;
+                    }
+                }).subscribe(new Subscriber<String>() {
+            @Override
+            public void onCompleted() {
+                Log.e("zip2", "onCompleted");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.e("zip2", "onError," + e.toString());
+            }
+
+            @Override
+            public void onNext(String s) {
+                Log.e("zip2", "s=  " + s);
+            }
+        });
+
+    }
+
 
     private void init() {
 
@@ -123,12 +193,12 @@ public class ZipActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e(TAG, "onError, "+ System.currentTimeMillis());
+                        Log.e(TAG, "onError, " + System.currentTimeMillis());
                     }
 
                     @Override
                     public void onNext(Picture picture) {
-                        Log.e(TAG, "onNext, picture="+picture.toString()+" , "+ System.currentTimeMillis());
+                        Log.e(TAG, "onNext, picture=" + picture.toString() + " , " + System.currentTimeMillis());
                     }
                 });
 
