@@ -6,10 +6,12 @@
 * create  
 &emsp;直接通过Observable的静态方法来创建  
 &emsp;通过已经创建的observable对象，再次创建，类似builder建造者模式  
-* unsafeCreate
+* unsafeCreate  
+&emsp;功能同create被deprecate掉的创建方法，可能存在背压问题
 * defer  
 &emsp;订阅时才创建Observable，每次订阅都会创建新的Observable
 * empty/never/throw  
+&emsp;测试用的，分别为直接onComplete、不发送任何事件、直接onError
 &emsp;测试用的，分别为直接onComplete、不发送任何事件、直接onError
 * from  
 &emsp;从跌代器Iterable、数组中按顺序获取数据源  
@@ -139,14 +141,23 @@
 &emsp;过滤掉exception，并开始发射入参指定的observable  
 &emsp;与onErrorResumeNext的区别是：onErrorResumeNext既能过滤error，也能过滤exception；而onExceptionResumeNext只能过滤exception
 * retry  
-&emsp;当onError时，不会发射error，而是重试n次，完全从源头重新开始发射
-*
+&emsp;当onError时，不会发射error，而是重试n次或规限重复，完全从源头重新开始发射。
+* retryWhen  
+&emsp;将onError中的Throwable传递给一个函数，这个函数产生另一个Observable，retryWhen观察它的结果再决定是不是要重新订阅原始的Observable。如果这个Observable发射了一项数据，它就重新订阅，如果这个Observable发射的是onError通知，它就将这个通知传递给观察者然后终止。
 
 
 #### 辅助操作
-*
-*
-*
+* delay  
+&emsp;对数据项和onComplete延迟指定时长后发射  
+&emsp;但不会延迟onError，它会立即发射onError，并丢弃因延迟而等待的数据项和onComplete
+* delay(Func1)  
+&emsp;针对每一项数据源观察Func1返回的Observable，若此observable终止，它就会发射对应的数据源  
+* delaySubscription  
+&emsp;延迟订阅原始的observable
+* do  
+&emsp;注册一个动作，用来观察原始Observable生命周期事件  
+&emsp;doOnEach、doOnNext、doOnError、doOnCompleted、
+&emsp;doOnSubscribe、doOnUnsubscribe、doOnTerminate、finallyDo
 *
 *
 *
