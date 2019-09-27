@@ -132,7 +132,7 @@
 
 
 
-#### 错误处理
+####  5.错误处理
 * onErrorReturn  
 &emsp;拦截error，并将入参call方法的返回值，转换为正常的数据并发射出去，最后发射onComplete
 * onErrorResumeNext  
@@ -158,31 +158,35 @@
 &emsp;注册一个动作，用来观察原始Observable生命周期事件  
 &emsp;doOnEach、doOnNext、doOnError、doOnCompleted、
 &emsp;doOnSubscribe、doOnUnsubscribe、doOnTerminate、finallyDo
-*
-*
-*
-*
-
-
-#### 条件与布尔操作
-*
-*
-*
-*
-*
-*
-*
 
 
 #### 连接操作
-*
-*
-*
-*
-*
-*
+* Connect  
+&emsp;可连接的Observable不会在订阅时就开始发射数据，而是直到使用了Connect操作符时才会开始。用这个方法，可以实现等待所有的观察者都订阅了Observable之后再开始发射数据
 *
 
+
+
+
+#### Subject
+
+    Subject 是 Observable 的一个扩展，同时还实现了 Observer 接口。
+    它可以像 Observer 一样接收事件，同时还可以像 Observable 一样把接收到的事件再发射出去。  
+
+* PublishSubject  
+&emsp;当一个数据发射到 PublishSubject 中时，PublishSubject 将立刻把这个数据发射到订阅到该 subject 上的所有 subscriber 中。  
+&emsp;只接收PublishSubject被订阅之后发送的数据
+
+* ReplaySubject  
+&emsp;可以缓存所有发射给他的数据。当一个新的订阅者订阅的时候，缓存的所有数据都会发射给这个订阅者。
+
+* BehaviorSubject  
+&emsp;只保留最后一个值。   
+&emsp;会接收到BehaviorSubject被订阅之前的最后一个数据，再接收订阅之后发射过来的数据。  
+&emsp;如果BehaviorSubject被订阅之前没有发送任何数据，则会发送一个默认数据。
+  
+* AsyncSubject  
+&emsp; 会接收AsyncSubject的onComplete()之前的最后一个数据。
 
 
 
