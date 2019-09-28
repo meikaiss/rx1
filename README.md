@@ -22,7 +22,8 @@
 * repeat  
 &emsp;将数据源重复发送几次
 * repeatWhen  
-&emsp;发射完毕后（不要发射onComplete），等待n秒后，重新从头开始发射
+&emsp;发射完毕后（不要发射onComplete），等待n秒后，重新从头开始发射  
+&emsp;`repeatWhen将源发射完毕时将此源应用一个函数，入参为此源，返回另一个源2，若源2发射的是next，则重复一次;若源2发射的是complete/error则不会重复` 
 * timer  
 &emsp;指定延迟后发射onNext=0，紧跟onComplete
 
@@ -36,7 +37,8 @@
 * map  
 &emsp;将源头的每一项数据 转换成 另一项 数据
 * flatMap  
-&emsp;将源头的每一项数据，转换成多项发射出去，两组多项之间是无序的。因其内部使用merge
+&emsp;将源头的每一项数据，转换成多项发射出去，两组多项之间是无序的。因其内部使用merge  
+&emsp;`理解后的心得：flatMap将源头发射的数据作为入参，应用到一个函数中，此函数返回另一个源，另一个源可以发射自有的多个数据`
 * concatMap  
 &emsp;将源头的每一项数据，转换成多项发射出去，两组多项之间是有序的。因其内部使用concat
 * switchMap  
@@ -165,10 +167,10 @@
 &emsp;可连接的Observable不会在订阅时就开始发射数据，而是直到使用了Connect操作符时才会开始。用这个方法，可以实现等待所有的观察者都订阅了Observable之后再开始发射数据
 *
 
+#### *Single*
+    轻量级的Obsevable，但其回调方法不是onComplete()/onNext()/onError()，而是onSuccess()/onError()。
 
-
-
-#### Subject
+#### *Subject*
 
     Subject 是 Observable 的一个扩展，同时还实现了 Observer 接口。
     它可以像 Observer 一样接收事件，同时还可以像 Observable 一样把接收到的事件再发射出去。  
@@ -190,9 +192,13 @@
 
 
 
+# 对比
 
-
-
+1. retryWhen、repeatWhen  
+   * retryWhen以onError作为条件决定是否重复
+   * repeatWhen以onComplete作为条件决定是否重复
+   
+2. cc
 
 
 

@@ -57,6 +57,7 @@ public class FlatMapActivity extends AppCompatActivity {
 
 
     private void init() {
+
         Observable.just(
                 "http://www.baidu.com/",
                 "http://www.google.com/",

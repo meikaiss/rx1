@@ -1,4 +1,4 @@
-package com.androidx.rx.publish;
+package com.androidx.rx.subject;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.androidx.rx.R;
 
 import rx.functions.Action1;
-import rx.subjects.PublishSubject;
 import rx.subjects.ReplaySubject;
 
 /**

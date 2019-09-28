@@ -1,4 +1,4 @@
-package com.androidx.rx.publish;
+package com.androidx.rx.subject;
 
 import android.os.Bundle;
 import android.util.Log;
