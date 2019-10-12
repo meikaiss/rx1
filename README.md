@@ -12,7 +12,6 @@
 &emsp;订阅时才创建Observable，每次订阅都会创建新的Observable
 * empty/never/throw  
 &emsp;测试用的，分别为直接onComplete、不发送任何事件、直接onError
-&emsp;测试用的，分别为直接onComplete、不发送任何事件、直接onError
 * from  
 &emsp;从跌代器Iterable、数组中按顺序获取数据源  
 * interval  
@@ -23,7 +22,7 @@
 &emsp;将数据源重复发送几次
 * repeatWhen  
 &emsp;发射完毕后（不要发射onComplete），等待n秒后，重新从头开始发射  
-&emsp;`repeatWhen将源发射完毕时将此源应用一个函数，入参为此源，返回另一个源2，若源2发射的是next，则重复一次;若源2发射的是complete/error则不会重复` 
+&emsp;`repeatWhen将源发射onComplete时将此源应用一个函数，入参为此源，返回另一个源2，若源2发射的是next，则重复一次;若源2发射的是complete/error则不会重复` 
 * timer  
 &emsp;指定延迟后发射onNext=0，紧跟onComplete
 
@@ -195,10 +194,11 @@
 # 对比
 
 1. retryWhen、repeatWhen  
-   * retryWhen以onError作为条件决定是否重复
-   * repeatWhen以onComplete作为条件决定是否重复
+   * retryWhen 当发射onError时，应用函数作为条件决定是否重复
+   * repeatWhen 当发射onComplete时，应用函数作为条件决定是否重复
    
-2. cc
+2. flatMap、concatMap
+   * 
 
 
 
