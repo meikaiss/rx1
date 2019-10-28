@@ -164,7 +164,7 @@
 #### 连接操作
 * Connect  
 &emsp;可连接的Observable不会在订阅时就开始发射数据，而是直到使用了Connect操作符时才会开始。用这个方法，可以实现等待所有的观察者都订阅了Observable之后再开始发射数据
-*
+
 
 #### *Single*
     轻量级的Obsevable，但其回调方法不是onComplete()/onNext()/onError()，而是onSuccess()/onError()。
@@ -201,7 +201,11 @@
    * 
 
 
-
+# 疑问
+1. subscribeOn作用于不同对象时的效果
+   - 作用于单个Observable时，可以让此Observable执行在指定线程中；
+   - 作用于集合类的Observable时，用于让集合中的Observable执行在指定的唯一线程中
+   - 若对集合中的每个Observable指定线程，则每个Observable都会执行在不同的线程
 
 
 
