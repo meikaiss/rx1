@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
 import rx.functions.Func2;
 import rx.functions.Func3;
 import rx.schedulers.Schedulers;
@@ -85,6 +86,11 @@ public class ZipActivity extends AppCompatActivity {
                 subscriber.onNext(51);
                 subscriber.onNext(52);
 
+            }
+        }).onErrorReturn(new Func1<Throwable, Integer>() {
+            @Override
+            public Integer call(Throwable throwable) {
+                return 0;
             }
         });
 

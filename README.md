@@ -115,9 +115,14 @@
 &emsp;如果子observable既没有发射onError也没有发射onComplete，则发出的数据流会停止在数量较少的那一次onNext  
 &emsp;如果组合的observable没有发射onError，则最终不会发射onError  
 &emsp;如果组合的observable中有一个发射了onError，则Subscriber中的onError会立即执行，并且不会再触发onNext和onCompleted  
+&emsp;如果希望子源头error时仍能正常合并，可以使用onErrorReturn在错误时返回默认值
 * merge  
 &emsp;将多个observable混合输出，看起来像是只有唯一一个observable一样  
+&emsp;只要其中任何一个源序列任意位置有失败，合并序列也会失败。若希望无视error，请使用mergeDelayError  
 &emsp;与zip的区别是，merge不会组装子observable的数据，merge是直接将子observable的源数据直接发送出去
+* mergeDelayError  
+&emsp;类似merge，区别是将延迟错误的释放，并继续合并没有失败的序列中的值。  
+&emsp;需要所源序列都产生一个error，在会在所有值发射完后发射error
 * concat  
 &emsp;连接多个observable，并且输出有序，先完全发送完第一个子observable后，再发送第二个子observalbe，以此类推
 * startWith  
@@ -198,7 +203,7 @@
    * repeatWhen 当发射onComplete时，应用函数作为条件决定是否重复
    
 2. flatMap、concatMap
-   * 
+   * flat无序、concat有序
 
 
 # 疑问
