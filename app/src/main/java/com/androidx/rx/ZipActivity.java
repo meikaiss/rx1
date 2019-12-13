@@ -43,6 +43,7 @@ public class ZipActivity extends AppCompatActivity {
          * 注：
          * 1、如果组合的observable中有一个没有发射数据，则Subscriber中的onNext也不会执行
          * 2、如果组合的observable中有一个发射了onError，则Subscriber中的onError会立即执行，并且不会再触发onNext和onCompleted
+         * 3、各个子observable可以发射多个数据，组合采用1:1:1...的方式组合
          */
 
     }
@@ -74,6 +75,9 @@ public class ZipActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * 如果其中某个子ovservable发生错误但不是希望立即报错，可以使用onErrorReturn
+     */
     private void zip2() {
         Observable observable1 = Observable.unsafeCreate(new Observable.OnSubscribe<Integer>() {
             @Override
